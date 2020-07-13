@@ -9,7 +9,7 @@ if __name__ == '__main__':
     # resize window
     sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=32, cols=128))
     # instatiante shell and execute
-    shellInstance = s.shell('localhost', 'postgres', 'postgres', 'ouroboros', 5432)
-    while not shellInstance.exit:
-        user_in = shellInstance.read_input()
-        shellInstance.execute(user_in)
+    sh = s.Shell('localhost', 'postgres', 'postgres', 'ouroboros', 5432)
+    while not sh.exit:
+        user_in = sh.read_input()
+        sh.execute(user_in)

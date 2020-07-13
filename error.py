@@ -1,3 +1,5 @@
+from utils import print_err
+
 class Error:
     def __init__(self):
         pass
@@ -22,6 +24,3 @@ class Error:
 
     def raiseAlreadyEditing(self, note):
         print_err("Already editing note: " + note)
-
-def print_err(text):
-    print("\u001b[31;1m" + text + "\u001b[0m")

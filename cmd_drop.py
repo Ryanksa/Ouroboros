@@ -1,3 +1,5 @@
+from utils import print_sys
+
 def drop_notes(sh, list_of_items=[]):
     """
     Command @drop:
@@ -6,8 +8,11 @@ def drop_notes(sh, list_of_items=[]):
     """
     if len(list_of_items) == 0:
         # no item given, delete all notes
-        sh.cursor.execute("""DROP TABLE notes""")
-        sh.cursor.execute("""CREATE TABLE notes(name VARCHAR(128) NOT NULL, content text, grouping VARCHAR(128))""")
+        print_sys("Are you sure you wish to delete all saved notes? (y/n)")
+        confirm = input()
+        if confirm.lower() == "y" or confirm.lower() == "yes":
+            sh.cursor.execute("""DROP TABLE notes""")
+            sh.cursor.execute("""CREATE TABLE notes(name VARCHAR(128) NOT NULL, content text, grouping VARCHAR(128))""")
     else:
         # items given, delete given items
         for item in list_of_items:

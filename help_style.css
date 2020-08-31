@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+    margin: 0;
+}
+
+p {
+    color: rgb(0, 190, 0);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.header {
+    background: rgb(241, 241, 241);
+    height: 5rem;
+    border: 5px groove grey;
+}
+
+.header_content {
+    font-size: 3rem;
+    text-align: center;
+    margin-block-start: 0;
+}

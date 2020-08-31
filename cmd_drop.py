@@ -8,7 +8,7 @@ def drop_notes(sh, list_of_items=[]):
     """
     if len(list_of_items) == 0:
         # no item given, delete all notes
-        print_sys("Are you sure you wish to delete all saved notes? (y/n)")
+        print_sys("Are you sure you wish to delete ALL saved notes? (y/n)")
         confirm = input()
         if confirm.lower() == "y" or confirm.lower() == "yes":
             sh.cursor.execute("""DROP TABLE notes""")

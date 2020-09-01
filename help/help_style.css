@@ -13,13 +13,13 @@ p {
 }
 
 .header {
-    background: rgb(241, 241, 241);
-    height: 5rem;
+    background: url("../img/ob.png") center/cover no-repeat fixed;
+    height: 15vh;
     border: 5px groove grey;
-}
-
-.header_content {
-    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    margin-block-start: 0;
+    font-size: 3rem;
+    font-weight: bold;
 }

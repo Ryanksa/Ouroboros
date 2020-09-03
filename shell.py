@@ -9,6 +9,7 @@ class Shell:
         # DB variables
         self.connection = pg.connect(host=dbHost, user=dbUser, password=dbPassword, database=dbName, port=port)
         self.cursor = self.connection.cursor()
+        self.cursor.execute("""CREATE TABLE IF NOT EXISTS notes(name VARCHAR(128) NOT NULL, content text, grouping VARCHAR(128))""")
         # error handler
         self.err = Error()
         # other variables

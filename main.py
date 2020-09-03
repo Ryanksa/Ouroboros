@@ -2,7 +2,6 @@ import sys, os
 import shell as s
 import pg8000 as pg
 
-# TODO: on startup, create ouroboros db if DNE and adjust it according
 if __name__ == '__main__':
     # enable coloured printing
     os.system('')

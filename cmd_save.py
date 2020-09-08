@@ -49,5 +49,7 @@ def save_to_notes(sh, list_of_items=[]):
             else:
                 new_content_str = note_content[0] + sh.curr
             sh.cursor.execute("""UPDATE notes SET content = %s WHERE name = %s""", (new_content_str, note,))
+
     sh.connection.commit()
     sh.curr = ""
+    sh.cmd["list"](sh)

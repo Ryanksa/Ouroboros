@@ -16,21 +16,24 @@ def drop_notes(sh, list_of_items=[]):
     else:
         # items given, delete given items
         for item in list_of_items:
+            # item given is a grouping
             if item.startswith("[") and item.endswith("}"):
                 group = item[1:-1]
+                # grouping given is empty, delete all notes without a grouping
                 if group == "":
                     sh.cursor.execute("""SELECT * FROM notes WHERE grouping IS NULL""")
                     if sh.cursor.fetchone() is not None:
                         sh.cursor.execute("""DELETE FROM notes WHERE grouping IS NULL""")
                     else:
                         sh.err.raiseDNE("[}")
+                # grouping given is non-empty, delete all notes with specified grouping
                 else:
                     sh.cursor.execute("""SELECT * FROM notes WHERE grouping = %s""", (group,))
                     if sh.cursor.fetchone() is not None:
                         sh.cursor.execute("""DELETE FROM notes WHERE grouping = %s""", (group,))
                     else:
                         sh.err.raiseDNE("[" + group + "}")
-            
+            # item given is a note, delete that note
             else:
                 sh.cursor.execute("""SELECT * FROM notes WHERE name = %s""", (item,))
                 if sh.cursor.fetchone() is not None:
@@ -38,3 +41,4 @@ def drop_notes(sh, list_of_items=[]):
                 else:
                     sh.err.raiseDNE(item)
     sh.connection.commit()
+    sh.cmd["list"](sh)

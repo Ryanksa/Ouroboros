@@ -2,7 +2,7 @@ import os
 import pg8000 as pg
 from error import Error
 from utils import print_sys, print_curr
-import cmd_curr, cmd_drop, cmd_edit, cmd_exit, cmd_help, cmd_list, cmd_open, cmd_peek, cmd_query, cmd_rename, cmd_save, cmd_setgrp
+import cmd_clear, cmd_curr, cmd_drop, cmd_edit, cmd_exit, cmd_help, cmd_list, cmd_open, cmd_peek, cmd_query, cmd_rename, cmd_save, cmd_setgrp
 
 class Shell:
     def __init__(self, dbHost, dbUser, dbPassword, dbName, port):
@@ -21,6 +21,7 @@ class Shell:
         self.cmd['help'] = cmd_help.help
         self.cmd['exit'] = cmd_exit.exit_shell
         self.cmd['curr'] = cmd_curr.get_curr
+        self.cmd['clear'] = cmd_clear.clear
         self.cmd['list'] = cmd_list.list_notes
         self.cmd['drop'] = cmd_drop.drop_notes
         self.cmd['save'] = cmd_save.save_to_notes

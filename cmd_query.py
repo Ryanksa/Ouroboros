@@ -1,5 +1,4 @@
-import re
-from utils import print_sys, highlighter
+from utils import print_sys, build_title, highlight_result
 
 def query_notes(sh, parameters=None):
     """
@@ -32,19 +31,19 @@ def query_notes(sh, parameters=None):
         regex = parameters[0]
     # search for the given pattern
     if grouping is None:
-        sh.cursor.execute("""SELECT * FROM notes WHERE name ILIKE %s OR content ILIKE %s ORDER BY grouping DESC"""
+        sh.cursor.execute("""SELECT * FROM notes WHERE name ILIKE %s OR content ILIKE %s ORDER BY grouping, name"""
                             , (pattern, pattern,))
     elif grouping == "":
-        sh.cursor.execute("""SELECT * FROM notes WHERE grouping IS NULL AND (name ILIKE %s OR content ILIKE %s)"""
+        sh.cursor.execute("""SELECT * FROM notes WHERE grouping IS NULL AND (name ILIKE %s OR content ILIKE %s) ORDER BY name"""
                             , (pattern, pattern,))
     else:
-        sh.cursor.execute("""SELECT * FROM notes WHERE grouping = %s AND (name ILIKE %s OR content ILIKE %s)"""
+        sh.cursor.execute("""SELECT * FROM notes WHERE grouping = %s AND (name ILIKE %s OR content ILIKE %s) ORDER BY name"""
                             , (grouping, pattern, pattern,))
     list_of_notes = sh.cursor.fetchall()
     # display the search results
     for note_tuple in list_of_notes:
         if note_tuple[2] is None:
             note_tuple[2] = ""
-        noteName = "[" + note_tuple[2] + "} " + note_tuple[0]
-        colored_content = re.sub(regex, highlighter, note_tuple[1][:-1], flags=re.I)
-        print_sys(" "*(128-len(noteName)) + noteName + "\n" + colored_content)
+        noteTitle = build_title(note_tuple[2], note_tuple[0])
+        colored_content = highlight_result(note_tuple[1][:-1], regex)
+        print_sys(noteTitle + "\n" + colored_content)

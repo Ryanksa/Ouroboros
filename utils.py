@@ -1,7 +1,9 @@
 import re
+import math
 
 border = "=" * 128
-highlighter = lambda m: '\u001b[0m\u001b[31;1m{}\u001b[0m\u001b[37;1m'.format(m.group())
+titleFormat = lambda m: "\u001b[0m\u001b[48;5;239m" + m + "\u001b[0m\u001b[37;1m"
+queryHighlight = lambda m: '\u001b[0m\u001b[31;1m{}\u001b[0m\u001b[37;1m'.format(m.group())
 
 def print_curr(text):
     prepender = lambda m: "\u001b[32m::\u001b[0m".format(m.group())
@@ -18,3 +20,13 @@ def print_sys(text):
 
 def print_err(text):
     print("\u001b[31;1m" + text + "\u001b[0m")
+
+def build_title(noteGrouping, noteName):
+    noteTitle = "[" + noteGrouping + "} " + noteName
+    padding1 = math.floor((128-len(noteTitle))/2)
+    padding2 = math.ceil((128-len(noteTitle))/2)
+    noteTitle = " "*padding1 + noteTitle + " "*padding2
+    return titleFormat(noteTitle)
+
+def highlight_result(result, regex):
+    return re.sub(regex, queryHighlight, result, flags=re.I)

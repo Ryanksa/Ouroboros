@@ -1,4 +1,5 @@
-from utils import print_sys
+import re
+from utils import print_sys, build_title
 
 def peek_notes(sh, list_of_items=[]):
     """
@@ -15,9 +16,9 @@ def peek_notes(sh, list_of_items=[]):
         if item.startswith("[") and item.endswith("}"):
             group = item[1:-1]
             if group == "":
-                sh.cursor.execute("""SELECT name FROM notes WHERE grouping IS NULL""")
+                sh.cursor.execute("""SELECT name FROM notes WHERE grouping IS NULL ORDER BY name""")
             else:
-                sh.cursor.execute("""SELECT name FROM notes WHERE grouping = %s""", (group,))
+                sh.cursor.execute("""SELECT name FROM notes WHERE grouping = %s ORDER BY name""", (group,))
             peek_note = sh.cursor.fetchone()
             if peek_note is None:
                 sh.err.raiseDNE("[" + group + "}")
@@ -34,7 +35,7 @@ def peek_notes(sh, list_of_items=[]):
             if content_grouping is not None:
                 if content_grouping[1] is None:
                     content_grouping[1] = ""
-                noteName = "[" + content_grouping[1] + "} " + item
-                print_sys(" "*(128-len(noteName)) + noteName + "\n" + content_grouping[0][:-1])
+                noteTitle = build_title(content_grouping[1], item)
+                print_sys(noteTitle + "\n" + content_grouping[0][:-1])
             else:
                 sh.err.raiseDNE(item)

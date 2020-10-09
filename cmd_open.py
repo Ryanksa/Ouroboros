@@ -1,3 +1,5 @@
+import exec
+
 def open_note(sh, parameters=None):
     """
     open the given note to curr, keeping track of the opened note
@@ -28,4 +30,4 @@ def open_note(sh, parameters=None):
         return None
     sh.opened = note
     sh.curr = content[0]
-    sh.cmd["curr"](sh)
+    exec.cmd["curr"](sh)

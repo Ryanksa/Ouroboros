@@ -1,3 +1,5 @@
+import exec
+
 def rename_note(sh, parameters=None):
     """
     Command @rename:
@@ -16,7 +18,7 @@ def rename_note(sh, parameters=None):
         new = sh.cursor.fetchone()
         # the note to be renamed DNE, raise error
         if old is None:
-            sh.err.raiseDNE(oldname)
+            sh.err.raiseDNE(old_name)
             return None
         # the new name for the note already exists, raise error
         elif new is not None:
@@ -32,4 +34,4 @@ def rename_note(sh, parameters=None):
     else:
         sh.raiseInvalidArg("Exactly 2 arguments should be used")
     sh.connection.commit()
-    sh.cmd["list"](sh)
+    exec.cmd["list"](sh)

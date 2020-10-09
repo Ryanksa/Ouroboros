@@ -1,4 +1,5 @@
 from utils import print_sys
+import exec
 import os
 
 def drop_notes(sh, list_of_items=[]):
@@ -13,8 +14,7 @@ def drop_notes(sh, list_of_items=[]):
         while (True):
             confirm = input("(y/n)")
             if confirm.lower() == "y" or confirm.lower() == "yes":
-                sh.cursor.execute("""DROP TABLE notes""")
-                sh.cursor.execute("""CREATE TABLE notes(name VARCHAR(128) NOT NULL, content text, grouping VARCHAR(128))""")
+                sh.cursor.execute("""DELETE FROM notes""")
                 os.system('cls')
                 break
             elif confirm.lower() == "n" or confirm.lower() == "no":
@@ -48,4 +48,4 @@ def drop_notes(sh, list_of_items=[]):
                 else:
                     sh.err.raiseDNE(item)
     sh.connection.commit()
-    sh.cmd["list"](sh)
+    exec.cmd["list"](sh)

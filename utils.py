@@ -1,7 +1,7 @@
 import re
 import math
 
-border = "=" * 128
+border = "~-" * 64
 titleFormat = lambda m: "\u001b[0m\u001b[48;5;239m" + m + "\u001b[0m\u001b[37;1m"
 queryHighlight = lambda m: '\u001b[0m\u001b[31;1m{}\u001b[0m\u001b[37;1m'.format(m.group())
 
@@ -14,9 +14,9 @@ def print_curr(text):
     print("\u001b[32m" + border + "\u001b[0m")
 
 def print_sys(text):
-    print("\u001b[37;1m" + border + "\u001b[0m")
+    print("\u001b[37m" + border + "\u001b[0m")
     print("\u001b[37;1m" + text + "\u001b[0m")
-    print("\u001b[37;1m" + border + "\u001b[0m")
+    print("\u001b[37m" + border + "\u001b[0m")
 
 def print_err(text):
     print("\u001b[31;1m" + text + "\u001b[0m")

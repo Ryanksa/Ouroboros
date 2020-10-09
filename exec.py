@@ -34,8 +34,8 @@ def execute(sh):
                 cmd[cmdin[0]](sh)
             else:
                 cmd[cmdin[0]](sh, cmdin[1:])
-        except:
-            sh.err.raiseInvalidCmd()
+        except Exception as e:
+            sh.err.raiseInvalidCmd(str(e))
     else:
         # store to current note
         sh.curr += userin + "\n"

@@ -1,7 +1,7 @@
 import re
 import math
 
-border = "~-" * 64
+border = "~" * 128
 titleFormat = lambda m: "\u001b[0m\u001b[48;5;239m" + m + "\u001b[0m\u001b[37;1m"
 queryHighlight = lambda m: '\u001b[0m\u001b[31;1m{}\u001b[0m\u001b[37;1m'.format(m.group())
 

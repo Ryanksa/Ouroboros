@@ -1,3 +1,5 @@
+import exec
+
 def save_to_notes(sh, list_of_items=[]):
     """
     Command @save:
@@ -52,4 +54,4 @@ def save_to_notes(sh, list_of_items=[]):
     sh.connection.commit()
     sh.curr = ""
     sh.opened = ""
-    sh.cmd["list"](sh)
+    exec.cmd["list"](sh)

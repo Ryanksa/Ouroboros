@@ -4,8 +4,8 @@ class Error:
     def __init__(self):
         pass
 
-    def raiseInvalidCmd(self):
-        print_err("Not a valid command")
+    def raiseInvalidCmd(self, errMsg):
+        print_err("Not a valid command: " + errMsg)
 
     def raiseGroupingSyntax(self, synErr):
         print_err("Invalid grouping syntax, expecting: ["+synErr+"}")

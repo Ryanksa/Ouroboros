@@ -1,3 +1,5 @@
+import exec
+
 def set_grouping(sh, parameters=None):
     """
     Command @setgrp:
@@ -36,4 +38,4 @@ def set_grouping(sh, parameters=None):
                 else:
                     sh.err.raiseDNE(note)        
     sh.connection.commit()
-    sh.cmd["list"](sh)
+    exec.cmd["list"](sh)

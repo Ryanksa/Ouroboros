@@ -1,6 +1,7 @@
 import os, sys
 from PyQt5.QtWidgets import QApplication
 from editor import Editor
+import exec
 
 def edit_note(sh, parameters=[]):
     """
@@ -19,7 +20,7 @@ def edit_note(sh, parameters=[]):
     
     # open the specified note first
     if len(parameters) == 1:
-        sh.cmd["open"](sh, parameters)
+        exec.cmd["open"](sh, parameters)
     # create a temp file to write curr to
     note = "temp"
     with open(note, 'w+t') as f:
@@ -37,4 +38,4 @@ def edit_note(sh, parameters=[]):
         sh.curr = new_curr
     else:
         sh.curr = new_curr + "\n"
-    sh.cmd["curr"](sh)
+    exec.cmd["curr"](sh)
